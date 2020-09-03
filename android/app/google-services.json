@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1062555103905",
+    "firebase_url": "https://tesaplikasisimetris-ad151.firebaseio.com",
+    "project_id": "tesaplikasisimetris-ad151",
+    "storage_bucket": "tesaplikasisimetris-ad151.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1062555103905:android:84e0d4002ec0ed8473b6e0",
+        "android_client_info": {
+          "package_name": "com.example.tes_simetris"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1062555103905-592u7ok1ar2s2u9ijk0l3gro2b36mgcn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBW5AcHGU8ZLeSkbdR9S1CiesaqG5ygveE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1062555103905-592u7ok1ar2s2u9ijk0l3gro2b36mgcn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
