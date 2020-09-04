@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tes_simetris/pesan_page.dart';
 
 class MainMenu extends StatefulWidget {
   final VoidCallback signOut;
@@ -45,7 +46,7 @@ class _MainMenuState extends State<MainMenu> {
   Widget build(BuildContext context) {
     final _listPage = <Widget>[
       Text('Halaman Home'),
-      Text('Halaman Favorite'),
+      ListPage(title: 'Halaman Pesan',),
       Text('Halaman Profile'),
     ];
 
@@ -55,8 +56,8 @@ class _MainMenuState extends State<MainMenu> {
         title: Text('Home'),
       ),
       BottomNavigationBarItem(
-        icon: Icon(Icons.favorite),
-        title: Text('Favorite'),
+        icon: Icon(Icons.message),
+        title: Text('Pesan'),
       ),
       BottomNavigationBarItem(
         icon: Icon(Icons.person),
