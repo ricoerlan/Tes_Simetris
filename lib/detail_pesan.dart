@@ -22,18 +22,6 @@ class DetailPage extends StatelessWidget {
       ),
     );
 
-    final coursePrice = Container(
-      padding: const EdgeInsets.all(7.0),
-      decoration: new BoxDecoration(
-          border: new Border.all(color: Colors.white),
-          borderRadius: BorderRadius.circular(5.0)),
-      child: new Text(
-        // "\$20",
-        "\$" + pesan.price.toString(),
-        style: TextStyle(color: Colors.white),
-      ),
-    );
-
     final topContentText = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -65,7 +53,6 @@ class DetailPage extends StatelessWidget {
                       pesan.level,
                       style: TextStyle(color: Colors.white),
                     ))),
-            Expanded(flex: 1, child: coursePrice)
           ],
         ),
       ],

@@ -75,11 +75,11 @@ class _ListPageState extends State<ListPage> {
       contentPadding: EdgeInsets.symmetric(horizontal : 20.0, vertical : 10.0),
       leading: Container(
         padding: EdgeInsets.only(right : 12.0),
-        decoration: BoxDecoration(
-          border: Border(
-            right: BorderSide(width : 1.0, color : Colors.white24)
-          ),
-        ),
+        // decoration: BoxDecoration(
+        //   border: Border(
+        //     right: BorderSide(width : 1.0, color : Colors.white24)
+        //   ),
+        // ),
         child: Icon(Icons.message, color: Colors.white,),
       ),
       title: Text(
@@ -166,52 +166,44 @@ List getPesan(){
         title: "Libur Kerja",
         level: "Intermidiate",
         indicatorValue: 1.0,
-        price: 20,
         content:
             "Start by taking a couple of minutes to read the info in this section. Launch your app and click on the Settings menu.  While on the settings page, click the Save button.  You should see a circular progress indicator display in the middle of the page and the user interface elements cannot be clicked due to the modal barrier that is constructed."),
     Pesan(
-        title: "Pergantian Direktur",
+        title: "Pergantian Jam Kerja",
         level: "Penting",
         indicatorValue: 1.0,
-        price: 50,
         content:
             "Start by taking a couple of minutes to read the info in this section. Launch your app and click on the Settings menu.  While on the settings page, click the Save button.  You should see a circular progress indicator display in the middle of the page and the user interface elements cannot be clicked due to the modal barrier that is constructed."),
     Pesan(
         title: "Penambahan Gaji",
         level: "Intermidiate",
         indicatorValue: 0.66,
-        price: 30,
         content:
             "Start by taking a couple of minutes to read the info in this section. Launch your app and click on the Settings menu.  While on the settings page, click the Save button.  You should see a circular progress indicator display in the middle of the page and the user interface elements cannot be clicked due to the modal barrier that is constructed."),
     Pesan(
         title: "Potongan Gaji",
         level: "Penting",
         indicatorValue: 1.0,
-        price: 30,
         content:
             "Start by taking a couple of minutes to read the info in this section. Launch your app and click on the Settings menu.  While on the settings page, click the Save button.  You should see a circular progress indicator display in the middle of the page and the user interface elements cannot be clicked due to the modal barrier that is constructed."),
     Pesan(
         title: "Perubahan Sistem Absensi",
         level: "Penting",
         indicatorValue: 1.0,
-        price: 50,
         content:
             "Start by taking a couple of minutes to read the info in this section. Launch your app and click on the Settings menu.  While on the settings page, click the Save button.  You should see a circular progress indicator display in the middle of the page and the user interface elements cannot be clicked due to the modal barrier that is constructed."),
     Pesan(
         title: "Update Data",
         level: "Normal",
         indicatorValue: 0.33,
-        price: 50,
         content:
             "Start by taking a couple of minutes to read the info in this section. Launch your app and click on the Settings menu.  While on the settings page, click the Save button.  You should see a circular progress indicator display in the middle of the page and the user interface elements cannot be clicked due to the modal barrier that is constructed."),
     Pesan(
         title: "Berita Duka",
         level: "Penting",
         indicatorValue: 1.0,
-        price: 50,
         content:
             "Start by taking a couple of minutes to read the info in this section. Launch your app and click on the Settings menu.  While on the settings page, click the Save button.  You should see a circular progress indicator display in the middle of the page and the user interface elements cannot be clicked due to the modal barrier that is constructed.  ")
- 
   ];
 }
 
