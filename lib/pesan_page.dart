@@ -28,49 +28,6 @@ class _ListPageState extends State<ListPage> {
 
   @override
   Widget build(BuildContext context) {
-
-    final topAppBar = AppBar(
-      elevation: 0.1,
-      backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
-      centerTitle: true,
-      title: Text(widget.title,),
-      actions: <Widget>[
-        IconButton(
-          icon: Icon(Icons.list),
-          onPressed: () {},
-        ),
-      ],
-    );
-
-
-    final makeBottom = Container(
-      height: 55.0,
-      child: BottomAppBar(
-        color: Color.fromRGBO(58, 66, 86, 1.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget> [
-            IconButton(
-              icon: Icon(Icons.home, color: Colors.white,),
-              onPressed: (){},
-            ),
-            IconButton(
-              icon: Icon(Icons.blur_on, color: Colors.white,),
-              onPressed: (){},
-            ),
-            IconButton(
-              icon: Icon(Icons.message, color: Colors.white,),
-              onPressed: (){},
-            ),
-            IconButton(
-              icon: Icon(Icons.account_box, color: Colors.white,),
-              onPressed: (){},
-            ),
-          ],
-        ),
-      ),
-    );
-
     ListTile makeListTile(Pesan pesan) => ListTile(
       contentPadding: EdgeInsets.symmetric(horizontal : 20.0, vertical : 10.0),
       leading: Container(
@@ -80,12 +37,12 @@ class _ListPageState extends State<ListPage> {
         //     right: BorderSide(width : 1.0, color : Colors.white24)
         //   ),
         // ),
-        child: Icon(Icons.message, color: Colors.white,),
+        child: Icon(Icons.message, color: Colors.grey,),
       ),
       title: Text(
         pesan.title,
         style: TextStyle(
-          color: Colors.white,
+          color: Colors.black54,
           fontWeight: FontWeight.bold
         ) 
       ),
@@ -98,20 +55,20 @@ class _ListPageState extends State<ListPage> {
             child: Container(
               // tag : 'hero',
               child: LinearProgressIndicator(
-                backgroundColor: Color.fromRGBO(209, 224, 224, 0.2),
+                backgroundColor: Colors.green[200],
                 value: pesan.indicatorValue,
-                valueColor: AlwaysStoppedAnimation(Colors.green),
+                valueColor: AlwaysStoppedAnimation(Colors.green[600]),
               ),
             )),
           Expanded(
             flex: 4,
             child: Padding(
               padding: EdgeInsets.only(left : 10.0),
-              child: Text(pesan.level, style : TextStyle(color : Colors.white)),))
+              child: Text(pesan.level, style : TextStyle(color : Colors.black54)),))
         ],
       ),
 
-      trailing: Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0,),
+      trailing: Icon(Icons.keyboard_arrow_right, color: Colors.grey, size: 30.0,),
       onTap: (){
 
         Navigator.push(
@@ -121,10 +78,18 @@ class _ListPageState extends State<ListPage> {
       );
 
     Card makeCard(Pesan pesan) => Card(
-      elevation: 8.0,
-      margin: EdgeInsets.symmetric(horizontal : 10.0, vertical : 6.0),
+      elevation: 3.0,
+      margin: EdgeInsets.symmetric(horizontal : 12.0, vertical : 3.0),
+      // shape: RoundedRectangleBorder(
+      //   borderRadius: BorderRadius.only(
+      //     bottomRight: Radius.circular(16),
+      //     topRight: Radius.circular(16),
+      //     bottomLeft: Radius.circular(16),
+      //     topLeft: Radius.circular(16),
+      //   )
+      // ),
       child: Container(
-        decoration: BoxDecoration(color: Color.fromRGBO(64, 75, 96, .9)),
+        //decoration: BoxDecoration(color: Color.fromRGBO(64, 75, 96, .9)),
         child: makeListTile(pesan),
       ),
     );
@@ -148,7 +113,7 @@ class _ListPageState extends State<ListPage> {
     
 
     return Scaffold(
-      backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
+      backgroundColor: Colors.blue[100],
       //appBar: topAppBar,
       body: makeBody,
       //bottomNavigationBar: makeBottom,
@@ -159,6 +124,8 @@ class _ListPageState extends State<ListPage> {
 
  
 }
+
+
 
 List getPesan(){
   return [ 
