@@ -3,6 +3,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tes_simetris/dashboard.dart';
 import 'package:tes_simetris/pesan_page.dart';
 
+import 'profile.dart';
+
 class MainMenu extends StatefulWidget {
   final VoidCallback signOut;
   MainMenu(this.signOut);
@@ -48,7 +50,7 @@ class _MainMenuState extends State<MainMenu> {
     final _listPage = <Widget>[
       Dashboard(),
       ListPage(title: 'Halaman Pesan',),
-      Text('Halaman Profile'),
+      Profile(),
     ];
 
     final _bottomNavBarItems = <BottomNavigationBarItem>[
