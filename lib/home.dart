@@ -79,6 +79,7 @@ class _MainMenuState extends State<MainMenu> {
       appBar: AppBar(
         title: Text('Simetris'),
         centerTitle: true,
+        backgroundColor: Colors.blue,
         actions: [
           IconButton(
             onPressed: () {

@@ -1,12 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:tes_simetris/model/token.dart';
 
 
 class Dashboard extends StatefulWidget {
   @override
   _DashboardState createState() => _DashboardState();
+
+
+  
 }
 
+
 class _DashboardState extends State<Dashboard> {
+
+  Token token;
+
+  @override
+  void initState() {
+    super.initState();
+    print(token);
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
