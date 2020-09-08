@@ -1,11 +1,15 @@
+
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 
 import 'model/pesan.dart';
 
 class DetailPage extends StatelessWidget {
   final Pesan pesan;
   DetailPage({Key key, this.pesan}) : super (key : key);
+
 
 
   @override
@@ -15,7 +19,7 @@ class DetailPage extends StatelessWidget {
       child: Container(
         child: LinearProgressIndicator(
             backgroundColor: Color.fromRGBO(209, 224, 224, 0.2),
-            value: pesan.indicatorValue,
+            value: 1,
             valueColor: AlwaysStoppedAnimation(Colors.green)),
       ),
     );
