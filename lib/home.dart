@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tes_simetris/dashboard.dart';
 import 'package:tes_simetris/pesan_page.dart';
 
 class MainMenu extends StatefulWidget {
@@ -45,7 +46,7 @@ class _MainMenuState extends State<MainMenu> {
   @override
   Widget build(BuildContext context) {
     final _listPage = <Widget>[
-      Text('Halaman Home'),
+      Dashboard(),
       ListPage(title: 'Halaman Pesan',),
       Text('Halaman Profile'),
     ];
@@ -66,16 +67,18 @@ class _MainMenuState extends State<MainMenu> {
     ];
 
     final _bottomNavBar = BottomNavigationBar(
+      backgroundColor: Colors.lightBlue[100],
       items: _bottomNavBarItems,
       currentIndex: _selectedTabIndex,
-      selectedItemColor: Colors.blueAccent,
-      unselectedItemColor: Colors.grey,
+      selectedItemColor: Colors.blue[900],
+      unselectedItemColor: Colors.blue[500],
       onTap: _onNavBarTapped,
     );
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Bottom Navigation Bar'),
+        title: Text('Simetris'),
+        centerTitle: true,
         actions: [
           IconButton(
             onPressed: () {

@@ -3,11 +3,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+
 import 'model/pesan.dart';
 
 class DetailPage extends StatelessWidget {
   final Pesan pesan;
   DetailPage({Key key, this.pesan}) : super (key : key);
+
 
 
   @override
@@ -17,7 +19,7 @@ class DetailPage extends StatelessWidget {
       child: Container(
         child: LinearProgressIndicator(
             backgroundColor: Color.fromRGBO(209, 224, 224, 0.2),
-            value: pesan.indicatorValue,
+            value: 1,
             valueColor: AlwaysStoppedAnimation(Colors.green)),
       ),
     );
@@ -98,14 +100,14 @@ class DetailPage extends StatelessWidget {
       pesan.content,
       style: TextStyle(fontSize: 18.0),
     );
-    final readButton = Padding(
-        padding: EdgeInsets.symmetric(vertical: 16.0),
-        child: RaisedButton(
-          onPressed: () => {},
-          color: Color.fromRGBO(58, 66, 86, 1.0),
-          child:
-              Text("TAKE THIS LESSON", style: TextStyle(color: Colors.white)),
-        ));
+    // final readButton = Padding(
+    //     padding: EdgeInsets.symmetric(vertical: 16.0),
+    //     child: RaisedButton(
+    //       onPressed: () => {},
+    //       color: Color.fromRGBO(58, 66, 86, 1.0),
+    //       child:
+    //           Text("TAKE THIS LESSON", style: TextStyle(color: Colors.white)),
+    //     ));
     final bottomContent = Container(
       // height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
@@ -113,7 +115,7 @@ class DetailPage extends StatelessWidget {
       padding: EdgeInsets.all(30.0),
       child: Center(
         child: Column(
-          children: <Widget>[bottomContentText, readButton],
+          children: <Widget>[bottomContentText],
         ),
       ),
     );
