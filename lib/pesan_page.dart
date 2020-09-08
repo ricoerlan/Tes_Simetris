@@ -1,6 +1,5 @@
 
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:tes_simetris/detail_pesan.dart';
 import 'package:http/http.dart' as http;
@@ -121,6 +120,20 @@ class _ListPageState extends State<ListPage> {
     //   ),
     // );
 
+
+     // final makeBody = Container(
+    //   child: ListView.builder(
+    //     scrollDirection: Axis.vertical,
+    //     shrinkWrap: true,
+    //     itemCount: pesan.length,
+    //     itemBuilder: (BuildContext context, int index){
+    //       return makeCard(pesan[index]);
+    //     },
+    //   ),
+    // );
+
+    
+
      void _onTapItem(BuildContext context, Pesan pesan) {
     Navigator.of(context).push(MaterialPageRoute(
         builder: (BuildContext context) => DetailPage(pesan: pesan,)));
@@ -134,24 +147,29 @@ class _ListPageState extends State<ListPage> {
           itemBuilder: (context, position) {
             return Card(
               child: Container(
-                height: 120.0,
+                height: 100.0,
                 width: 120.0,
                 child: Center(
                   child: ListTile(
-                    subtitle: Padding(
-                      padding: const EdgeInsets.only(top: 5.0),
-                      child: Text(
-                        '${pesan[position].title}',
-                      ),
+
+                    leading: Container(
+                      padding: EdgeInsets.all(12.0),
+                      child: Icon(Icons.message, color: Colors.grey, size: 35,),
                     ),
+
                     title: Text(
-                      '${pesan[position].level}',
-                      style: TextStyle(
-                          fontSize: 14.0,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold),
-                    ),
+                            '${pesan[position].title}',
+                            style: TextStyle(
+                                fontSize: 14.0,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
+                          ),
                     
+                    subtitle: Text('${pesan[position].content}', maxLines: 2,),
+
+                    trailing: Text(
+                      '${pesan[position].waktu}',
+                      style: TextStyle(fontSize: 10)),
                     onTap: () => _onTapItem(context, pesan[position]),
                   ),
                 ),
@@ -160,22 +178,7 @@ class _ListPageState extends State<ListPage> {
           }),
     );
   }
-
-
-    // final makeBody = Container(
-    //   child: ListView.builder(
-    //     scrollDirection: Axis.vertical,
-    //     shrinkWrap: true,
-    //     itemCount: pesan.length,
-    //     itemBuilder: (BuildContext context, int index){
-    //       return makeCard(pesan[index]);
-    //     },
-    //   ),
-    // );
-
-    
-
-    
+ 
 
     return Scaffold(
       backgroundColor: Colors.blue[100],
@@ -195,53 +198,4 @@ class _ListPageState extends State<ListPage> {
 
  
 }
-
-
-
-// List getPesan(){
-//   return [ 
-//     Pesan(
-//         title: "Libur Kerja",
-//         level: "Intermidiate",
-//         indicatorValue: 1.0,
-//         content:
-//             "Start by taking a couple of minutes to read the info in this section. Launch your app and click on the Settings menu.  While on the settings page, click the Save button.  You should see a circular progress indicator display in the middle of the page and the user interface elements cannot be clicked due to the modal barrier that is constructed."),
-//     Pesan(
-//         title: "Pergantian Jam Kerja",
-//         level: "Penting",
-//         indicatorValue: 1.0,
-//         content:
-//             "Start by taking a couple of minutes to read the info in this section. Launch your app and click on the Settings menu.  While on the settings page, click the Save button.  You should see a circular progress indicator display in the middle of the page and the user interface elements cannot be clicked due to the modal barrier that is constructed."),
-//     Pesan(
-//         title: "Penambahan Gaji",
-//         level: "Intermidiate",
-//         indicatorValue: 0.66,
-//         content:
-//             "Start by taking a couple of minutes to read the info in this section. Launch your app and click on the Settings menu.  While on the settings page, click the Save button.  You should see a circular progress indicator display in the middle of the page and the user interface elements cannot be clicked due to the modal barrier that is constructed."),
-//     Pesan(
-//         title: "Potongan Gaji",
-//         level: "Penting",
-//         indicatorValue: 1.0,
-//         content:
-//             "Start by taking a couple of minutes to read the info in this section. Launch your app and click on the Settings menu.  While on the settings page, click the Save button.  You should see a circular progress indicator display in the middle of the page and the user interface elements cannot be clicked due to the modal barrier that is constructed."),
-//     Pesan(
-//         title: "Perubahan Sistem Absensi",
-//         level: "Penting",
-//         indicatorValue: 1.0,
-//         content:
-//             "Start by taking a couple of minutes to read the info in this section. Launch your app and click on the Settings menu.  While on the settings page, click the Save button.  You should see a circular progress indicator display in the middle of the page and the user interface elements cannot be clicked due to the modal barrier that is constructed."),
-//     Pesan(
-//         title: "Update Data",
-//         level: "Normal",
-//         indicatorValue: 0.33,
-//         content:
-//             "Start by taking a couple of minutes to read the info in this section. Launch your app and click on the Settings menu.  While on the settings page, click the Save button.  You should see a circular progress indicator display in the middle of the page and the user interface elements cannot be clicked due to the modal barrier that is constructed."),
-//     Pesan(
-//         title: "Berita Duka",
-//         level: "Penting",
-//         indicatorValue: 1.0,
-//         content:
-//             "Start by taking a couple of minutes to read the info in this section. Launch your app and click on the Settings menu.  While on the settings page, click the Save button.  You should see a circular progress indicator display in the middle of the page and the user interface elements cannot be clicked due to the modal barrier that is constructed.  ")
-//   ];
-// }
 

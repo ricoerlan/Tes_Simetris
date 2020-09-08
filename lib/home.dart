@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tes_simetris/custome/color.dart';
 import 'package:tes_simetris/dashboard.dart';
 import 'package:tes_simetris/pesan_page.dart';
 
@@ -67,11 +68,11 @@ class _MainMenuState extends State<MainMenu> {
     ];
 
     final _bottomNavBar = BottomNavigationBar(
-      backgroundColor: Colors.lightBlue[100],
+      backgroundColor: AppColors.colorPrimaryDark,
       items: _bottomNavBarItems,
       currentIndex: _selectedTabIndex,
-      selectedItemColor: Colors.blue[900],
-      unselectedItemColor: Colors.blue[500],
+      selectedItemColor: Colors.white,
+      unselectedItemColor: Colors.blue[900],
       onTap: _onNavBarTapped,
     );
 

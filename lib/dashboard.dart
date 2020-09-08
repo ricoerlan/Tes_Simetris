@@ -1,40 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:tes_simetris/model/token.dart';
+import 'package:tes_simetris/custome/color.dart';
 
 
 class Dashboard extends StatefulWidget {
   @override
   _DashboardState createState() => _DashboardState();
-
-
-  
+ 
 }
 
 
 class _DashboardState extends State<Dashboard> {
 
-  Token token;
 
   @override
   void initState() {
     super.initState();
-    print(token);
   }
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue[200],
+      backgroundColor: Colors.blue[100],
       body: Container(
-        padding : EdgeInsets.symmetric(vertical : 20.0, horizontal : 0.0),
+        padding : EdgeInsets.symmetric(vertical : 0.0, horizontal : 0.0),
         child: GridView.count(
           crossAxisCount: 2,
-          padding: EdgeInsets.all(3.0),
+          padding: EdgeInsets.all(0.0),
           children: <Widget> [
             makeDashboardItem('Cari', Icons.book),
-            makeDashboardItem('Cari', Icons.alarm),
-            makeDashboardItem('Cari', Icons.bookmark),
+            makeDashboardItem('Data', Icons.alarm),
+            makeDashboardItem('Jam', Icons.bookmark),
             makeDashboardItem('Cari', Icons.book),
             makeDashboardItem('Cari', Icons.alarm),
             makeDashboardItem('Cari', Icons.bookmark),
@@ -48,11 +44,11 @@ class _DashboardState extends State<Dashboard> {
   Card makeDashboardItem(String title, IconData icon){
   return Card(
     elevation: 1.0,
-    color: Colors.blue[100],
+    color: Colors.white,
     shape: RoundedRectangleBorder(
       borderRadius : BorderRadius.circular(15.0)
     ),
-    margin: EdgeInsets.all(18.0),
+    margin: EdgeInsets.all(8.0),
     child: Container(
       //decoration: BoxDecoration(color : Colors.blue[100]),
       child: InkWell(
