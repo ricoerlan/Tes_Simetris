@@ -38,6 +38,8 @@ class _ListPageState extends State<ListPage> {
       list = rest.map<Pesan>((json) => Pesan.fromJson(json)).toList();
     }
 
+
+
     print("List Size: ${list.length}");
     return list;
 
@@ -45,7 +47,9 @@ class _ListPageState extends State<ListPage> {
 
 
 
+
   List<Pesan> pesan;
+
 
   @override
   void initState() {
@@ -54,6 +58,10 @@ class _ListPageState extends State<ListPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    
+
+
     // ListTile makeListTile(Pesan pesan) => ListTile(
     //   contentPadding: EdgeInsets.symmetric(horizontal : 20.0, vertical : 10.0),
     //   leading: Container(
@@ -134,6 +142,8 @@ class _ListPageState extends State<ListPage> {
 
     
 
+    
+
      void _onTapItem(BuildContext context, Pesan pesan) {
     Navigator.of(context).push(MaterialPageRoute(
         builder: (BuildContext context) => DetailPage(pesan: pesan,)));
@@ -153,8 +163,8 @@ class _ListPageState extends State<ListPage> {
                   child: ListTile(
 
                     leading: Container(
-                      padding: EdgeInsets.all(12.0),
-                      child: Icon(Icons.message, color: Colors.grey, size: 35,),
+                      padding: EdgeInsets.all(0.0),
+                      child: CircleAvatar(backgroundImage: AssetImage('assets/060-nurse.png'))
                     ),
 
                     title: Text(
