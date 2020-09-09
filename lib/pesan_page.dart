@@ -46,12 +46,12 @@ class _ListPageState extends State<ListPage> {
 
   }
 
-  AssetImage getImage(String sk){
-    if(sk == '1'){
+  AssetImage getImage(String author){
+    if(author == 'Humas'){
       return AssetImage("assets/065-manager.png");
-    }else if(sk == '2'){
+    }else if(author == 'INSTI'){
       return AssetImage("assets/030-mechanic.png");
-    }else if(sk == '3'){
+    }else if(author == 'Poliklinik'){
       return AssetImage("assets/060-nurse.png");
     }else{
       return AssetImage("assets/039-marketing.png");
@@ -91,8 +91,14 @@ class _ListPageState extends State<ListPage> {
 
                     //Header
                     leading: Container(
-                      padding: EdgeInsets.all(0.0),
-                      child: CircleAvatar(backgroundImage: getImage('${pesan[position].id_sk}'))
+                      child: Column(
+                        children: <Widget> [
+                          CircleAvatar(backgroundImage: getImage('${pesan[position].author}')),
+                          Text(
+                            '${pesan[position].author}',
+                             style: TextStyle(fontWeight: FontWeight.bold),)
+                        ],
+                      ) 
                     ),
 
                     title: Text(
@@ -124,7 +130,7 @@ class _ListPageState extends State<ListPage> {
       body: FutureBuilder(
         future: getData(),
         builder: (context, snapshot) {
-          return snapshot.data != null ? listViewWidget(snapshot.data) : Center(child:SpinKitChasingDots(color: Colors.blue, size: 80,));
+          return snapshot.data != null ? listViewWidget(snapshot.data) : Center(child:SpinKitFadingCube(color: Colors.blue, size: 80,));
         },
 
       ),

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
@@ -29,6 +30,7 @@ enum LoginStatus { notSignIn, signIn }
 class _LoginState extends State<Login> {
   LoginStatus _loginStatus = LoginStatus.notSignIn;
   String email, password;
+  FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   final _key = new GlobalKey<FormState>();
 
   bool _secureText = true;
@@ -61,6 +63,15 @@ class _LoginState extends State<Login> {
         _loginStatus = LoginStatus.signIn;
         savePref(value, emailAPI, namaAPI, id);
       });
+
+      _firebaseMessaging.getToken().then((token) {
+        print("firebase token : $token");
+        print("email : $email");
+
+        final responses = http.post('http://hipmagazine.000webhostapp.com/Simetris/updateDeviceToken.php',
+        body: {"email" : email, "DeviceToken" : token});
+      });
+
       print(pesan);
       // Navigator.push(
       //   context,
