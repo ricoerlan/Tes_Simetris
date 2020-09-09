@@ -5,13 +5,17 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tes_simetris/welcome.dart';
 
 import 'home.dart';
 
 void main() {
   runApp(MaterialApp(
-    home: Login(),
+    home: Welcome(),
     theme: ThemeData(),
+    routes: <String, WidgetBuilder>{
+      '/login' : (BuildContext context) => Login(),
+    },
   ));
 }
 
@@ -44,7 +48,7 @@ class _LoginState extends State<Login> {
   }
 
   login() async {
-    final response = await http.post("http://10.1.1.118/login/login.php",
+    final response = await http.post("http://hipmagazine.000webhostapp.com/Simetris/login.php",
         body: {"email": email, "password": password});
     final data = jsonDecode(response.body);
     int value = data['value'];
@@ -69,7 +73,7 @@ class _LoginState extends State<Login> {
     }
   }
 
-  savePref(int value, String email, String nama, String id) async {
+  savePref(int value, String email, String nama, String id, ) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
       preferences.setInt("value", value);
