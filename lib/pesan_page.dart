@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:tes_simetris/detail_pesan.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import 'model/pesan.dart';
 
@@ -123,7 +124,7 @@ class _ListPageState extends State<ListPage> {
       body: FutureBuilder(
         future: getData(),
         builder: (context, snapshot) {
-          return snapshot.data != null ? listViewWidget(snapshot.data) : Center(child: CircularProgressIndicator(),);
+          return snapshot.data != null ? listViewWidget(snapshot.data) : Center(child:SpinKitChasingDots(color: Colors.blue, size: 80,));
         },
 
       ),

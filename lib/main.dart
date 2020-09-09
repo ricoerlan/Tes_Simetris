@@ -5,13 +5,17 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tes_simetris/welcome.dart';
 
 import 'home.dart';
 
 void main() {
   runApp(MaterialApp(
-    home: Login(),
+    home: Welcome(),
     theme: ThemeData(),
+    routes: <String, WidgetBuilder>{
+      '/login' : (BuildContext context) => Login(),
+    },
   ));
 }
 
