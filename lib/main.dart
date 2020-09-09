@@ -69,7 +69,7 @@ class _LoginState extends State<Login> {
     }
   }
 
-  savePref(int value, String email, String nama, String id) async {
+  savePref(int value, String email, String nama, String id, ) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
       preferences.setInt("value", value);

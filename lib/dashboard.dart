@@ -21,7 +21,7 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue[100],
+      backgroundColor: Colors.blue[50],
       body: Container(
         padding : EdgeInsets.symmetric(vertical : 0.0, horizontal : 0.0),
         child: GridView.count(
@@ -43,7 +43,7 @@ class _DashboardState extends State<Dashboard> {
 
   Card makeDashboardItem(String title, IconData icon){
   return Card(
-    elevation: 1.0,
+    elevation: 4.0,
     color: Colors.white,
     shape: RoundedRectangleBorder(
       borderRadius : BorderRadius.circular(15.0)
