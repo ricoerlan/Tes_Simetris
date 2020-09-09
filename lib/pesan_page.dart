@@ -23,6 +23,10 @@ class _ListPageState extends State<ListPage> {
   String iconUrl;
   String id_sk = "2";
 
+  // void getId(String id_sk){
+  //   this.id_sk = id_sk;
+  // }
+
   
   Future<List<Pesan>> getData () async{
 
