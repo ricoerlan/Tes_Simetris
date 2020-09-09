@@ -44,7 +44,7 @@ class _LoginState extends State<Login> {
   }
 
   login() async {
-    final response = await http.post("http://10.1.1.118/login/login.php",
+    final response = await http.post("http://hipmagazine.000webhostapp.com/Simetris/login.php",
         body: {"email": email, "password": password});
     final data = jsonDecode(response.body);
     int value = data['value'];
