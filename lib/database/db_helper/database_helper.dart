@@ -10,9 +10,9 @@ class DatabaseHelper {
   static final _databaseName = "MyDatabase.db";
   static final _databaseVersion = 1;
 
-  static final table = 'pesan';
+  static final table = 'pesann';
   
-  static final columnId = 'id';
+  static final columnId = 'id_message';
   static final columnIdSk = 'id_sk';
   static final columnTitle = 'title';
   static final columnContent = 'content';
@@ -34,7 +34,7 @@ class DatabaseHelper {
     return _database;
   }
   
-  // this opens the database (and creates it if it doesn't exist)
+  // this opens the database (and creates it if it doesn't exist)   
   _initDatabase() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
     String path = join(documentsDirectory.path, _databaseName);
