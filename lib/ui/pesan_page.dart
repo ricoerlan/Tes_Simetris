@@ -1,11 +1,11 @@
 
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:tes_simetris/detail_pesan.dart';
+import 'package:tes_simetris/ui/detail_pesan.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-import 'model/pesan.dart';
+import '../model/pesan.dart';
 
 class ListPage extends StatefulWidget {
    final String title ;
@@ -23,12 +23,16 @@ class _ListPageState extends State<ListPage> {
   String iconUrl;
   String id_sk = "2";
 
+  // void getId(String id_sk){
+  //   this.id_sk = id_sk;
+  // }
+
   
   Future<List<Pesan>> getData () async{
 
     List<Pesan> list;
 
-    String link = "http://hipmagazine.000webhostapp.com/Simetris/getAllMessages.php?id_sk=$id_sk";
+    String link = "http://jogjamotor24jam.com/getAllMessages.php?id_sk=$id_sk";
 
     var res = await http.get(Uri.encodeFull(link));
     print(res.body);
@@ -46,12 +50,12 @@ class _ListPageState extends State<ListPage> {
 
   }
 
-  AssetImage getImage(String sk){
-    if(sk == '1'){
+  AssetImage getImage(String author){
+    if(author == 'Humas'){
       return AssetImage("assets/065-manager.png");
-    }else if(sk == '2'){
+    }else if(author == 'INSTI'){
       return AssetImage("assets/030-mechanic.png");
-    }else if(sk == '3'){
+    }else if(author == 'Poliklinik'){
       return AssetImage("assets/060-nurse.png");
     }else{
       return AssetImage("assets/039-marketing.png");
@@ -69,10 +73,14 @@ class _ListPageState extends State<ListPage> {
   @override
   Widget build(BuildContext context) {
 
-    void _onTapItem(BuildContext context, Pesan pesan) {
+    void _onTapItem(BuildContext context, Pesan pesan, String author) {
     Navigator.of(context).push(MaterialPageRoute(
-        builder: (BuildContext context) => DetailPage(pesan: pesan,)));
+        builder: (BuildContext context) => DetailPage(pesan: pesan,author: author,)));
+
+        print(author);
   }
+
+  
 
     Widget listViewWidget(List<Pesan> pesan) {
     
@@ -91,8 +99,14 @@ class _ListPageState extends State<ListPage> {
 
                     //Header
                     leading: Container(
-                      padding: EdgeInsets.all(0.0),
-                      child: CircleAvatar(backgroundImage: getImage('${pesan[position].id_sk}'))
+                      child: Column(
+                        children: <Widget> [
+                          CircleAvatar(backgroundImage: getImage('${pesan[position].author}')),
+                          Text(
+                            '${pesan[position].author}',
+                             style: TextStyle(fontWeight: FontWeight.bold),)
+                        ],
+                      ) 
                     ),
 
                     title: Text(
@@ -106,10 +120,20 @@ class _ListPageState extends State<ListPage> {
                     subtitle: Text('${pesan[position].content}', maxLines: 2,),
 
                     // Footer 
-                    trailing: Text(
-                      '${pesan[position].waktu}',
-                      style: TextStyle(fontSize: 10)),
-                    onTap: () => _onTapItem(context, pesan[position]),
+                    trailing:Container(
+                      child: Column(
+                        children: <Widget> [
+                          Text(
+                            '${pesan[position].tanggal}',
+                            style: TextStyle(fontSize: 10),),
+                          Text(
+                            '${pesan[position].waktu}',
+                            style: TextStyle(fontSize: 10)),
+                          
+                        ],
+                      ),
+                    ) ,
+                    onTap: () => _onTapItem(context, pesan[position],'${pesan[position].author}' ),
                   ),
                 ),
               ),
@@ -118,15 +142,13 @@ class _ListPageState extends State<ListPage> {
     );
   }
  
-
     return Scaffold(
       backgroundColor: Colors.blue[50],
       body: FutureBuilder(
         future: getData(),
         builder: (context, snapshot) {
-          return snapshot.data != null ? listViewWidget(snapshot.data) : Center(child:SpinKitChasingDots(color: Colors.blue, size: 80,));
+          return snapshot.data != null ? listViewWidget(snapshot.data) : Center(child:SpinKitPouringHourglass(color: Colors.blue, size: 100,));
         },
-
       ),
       //body: makeBody,
       
