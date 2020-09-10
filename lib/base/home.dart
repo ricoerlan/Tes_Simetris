@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tes_simetris/custome/color.dart';
-import 'package:tes_simetris/dashboard.dart';
-import 'package:tes_simetris/pesan_page.dart';
+import 'package:tes_simetris/ui/dashboard.dart';
+import 'package:tes_simetris/ui/pesan_page.dart';
 
 class MainMenu extends StatefulWidget {
   final VoidCallback signOut;

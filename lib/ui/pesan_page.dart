@@ -1,11 +1,11 @@
 
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:tes_simetris/detail_pesan.dart';
+import 'package:tes_simetris/ui/detail_pesan.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-import 'model/pesan.dart';
+import '../model/pesan.dart';
 
 class ListPage extends StatefulWidget {
    final String title ;
@@ -32,7 +32,7 @@ class _ListPageState extends State<ListPage> {
 
     List<Pesan> list;
 
-    String link = "http://hipmagazine.000webhostapp.com/Simetris/getAllMessages.php?id_sk=$id_sk";
+    String link = "http://jogjamotor24jam.com/getAllMessages.php?id_sk=$id_sk";
 
     var res = await http.get(Uri.encodeFull(link));
     print(res.body);
@@ -73,10 +73,14 @@ class _ListPageState extends State<ListPage> {
   @override
   Widget build(BuildContext context) {
 
-    void _onTapItem(BuildContext context, Pesan pesan) {
+    void _onTapItem(BuildContext context, Pesan pesan, String author) {
     Navigator.of(context).push(MaterialPageRoute(
-        builder: (BuildContext context) => DetailPage(pesan: pesan,)));
+        builder: (BuildContext context) => DetailPage(pesan: pesan,author: author,)));
+
+        print(author);
   }
+
+  
 
     Widget listViewWidget(List<Pesan> pesan) {
     
@@ -116,10 +120,20 @@ class _ListPageState extends State<ListPage> {
                     subtitle: Text('${pesan[position].content}', maxLines: 2,),
 
                     // Footer 
-                    trailing: Text(
-                      '${pesan[position].waktu}',
-                      style: TextStyle(fontSize: 10)),
-                    onTap: () => _onTapItem(context, pesan[position]),
+                    trailing:Container(
+                      child: Column(
+                        children: <Widget> [
+                          Text(
+                            '${pesan[position].tanggal}',
+                            style: TextStyle(fontSize: 10),),
+                          Text(
+                            '${pesan[position].waktu}',
+                            style: TextStyle(fontSize: 10)),
+                          
+                        ],
+                      ),
+                    ) ,
+                    onTap: () => _onTapItem(context, pesan[position],'${pesan[position].author}' ),
                   ),
                 ),
               ),
@@ -128,15 +142,13 @@ class _ListPageState extends State<ListPage> {
     );
   }
  
-
     return Scaffold(
       backgroundColor: Colors.blue[50],
       body: FutureBuilder(
         future: getData(),
         builder: (context, snapshot) {
-          return snapshot.data != null ? listViewWidget(snapshot.data) : Center(child:SpinKitFadingCube(color: Colors.blue, size: 80,));
+          return snapshot.data != null ? listViewWidget(snapshot.data) : Center(child:SpinKitPouringHourglass(color: Colors.blue, size: 100,));
         },
-
       ),
       //body: makeBody,
       

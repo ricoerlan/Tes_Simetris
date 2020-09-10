@@ -38,7 +38,7 @@ class _WelcomeState extends State<Welcome> {
     return Scaffold(
       backgroundColor: Colors.blue[200],
       body: Center(
-        child : SpinKitFadingCube(
+        child : SpinKitDualRing(
           color : Colors.white,
           size: 80.0,
         )

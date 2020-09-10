@@ -6,9 +6,9 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tes_simetris/welcome.dart';
+import 'package:tes_simetris/ui/welcome.dart';
 
-import 'home.dart';
+import 'base/home.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -50,7 +50,7 @@ class _LoginState extends State<Login> {
   }
 
   login() async {
-    final response = await http.post("http://hipmagazine.000webhostapp.com/Simetris/login.php",
+    final response = await http.post("http://jogjamotor24jam.com/login_simetris.php",
         body: {"email": email, "password": password});
     final data = jsonDecode(response.body);
     int value = data['value'];
@@ -68,7 +68,7 @@ class _LoginState extends State<Login> {
         print("firebase token : $token");
         print("email : $email");
 
-        final responses = http.post('http://hipmagazine.000webhostapp.com/Simetris/updateDeviceToken.php',
+        final responses = http.post('http://jogjamotor24jam.com/updateDeviceToken.php',
         body: {"email" : email, "DeviceToken" : token});
       });
 
