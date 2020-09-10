@@ -1,22 +1,18 @@
 import 'dart:convert';
 
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
-
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tes_simetris/ui/welcome.dart';
-
-import 'base/home.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:tes_simetris/base/home.dart';
+import 'package:tes_simetris/ui/pesan_page.dart';
 
 void main() {
   runApp(MaterialApp(
-    home: Welcome(),
+    home: Login(),
     theme: ThemeData(),
-    routes: <String, WidgetBuilder>{
-      '/login' : (BuildContext context) => Login(),
-    },
   ));
 }
 
@@ -30,8 +26,11 @@ enum LoginStatus { notSignIn, signIn }
 class _LoginState extends State<Login> {
   LoginStatus _loginStatus = LoginStatus.notSignIn;
   String email, password;
-  FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   final _key = new GlobalKey<FormState>();
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      new FlutterLocalNotificationsPlugin();
 
   bool _secureText = true;
 
@@ -50,7 +49,8 @@ class _LoginState extends State<Login> {
   }
 
   login() async {
-    final response = await http.post("http://jogjamotor24jam.com/login_simetris.php",
+    final response = await http.post(
+        "http://jogjamotor24jam.com/login_simetris.php",
         body: {"email": email, "password": password});
     final data = jsonDecode(response.body);
     int value = data['value'];
@@ -65,11 +65,12 @@ class _LoginState extends State<Login> {
       });
 
       _firebaseMessaging.getToken().then((token) {
-        print("firebase token : $token");
-        print("email : $email");
+        print("firebase tokens : $token");
+        print("email : $email ");
 
-        final responses = http.post('http://jogjamotor24jam.com/updateDeviceToken.php',
-        body: {"email" : email, "DeviceToken" : token});
+        final responses = http.post(
+            "http://jogjamotor24jam.com/updateDeviceToken.php",
+            body: {"email": email, "DeviceToken": token});
       });
 
       print(pesan);
@@ -84,7 +85,7 @@ class _LoginState extends State<Login> {
     }
   }
 
-  savePref(int value, String email, String nama, String id, ) async {
+  savePref(int value, String email, String nama, String id) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
       preferences.setInt("value", value);
@@ -119,6 +120,61 @@ class _LoginState extends State<Login> {
     // TODO: implement initState
     super.initState();
     getPref();
+    initNotifications();
+    _firebaseMessaging.getToken().then((token) {
+      print("firebase token : $token");
+    });
+  }
+
+  initNotifications() {
+    var initializationSettingsAndroid =
+        new AndroidInitializationSettings('@mipmap/ic_launcher');
+    var initializationSettingsIOS = new IOSInitializationSettings();
+    var initializationSettings = new InitializationSettings(
+        initializationSettingsAndroid, initializationSettingsIOS);
+    flutterLocalNotificationsPlugin.initialize(initializationSettings,
+        onSelectNotification: onSelectNotification);
+    _firebaseMessaging.configure(
+      onMessage: (Map<String, dynamic> message) async {
+        showNotification(message['data']['title'], message['data']['body']);
+        // showNotification(message['data']['title'], message['data']['message']);
+        print(message['data']);
+        print("onMessage: $message");
+      },
+      onLaunch: (Map<String, dynamic> message) async {
+        print("onLaunch: $message");
+        Navigator.pushNamed(context, '/notify');
+      },
+      onResume: (Map<String, dynamic> message) async {
+        print("onResume: $message");
+      },
+    );
+  }
+
+  void showNotification(String title, String body) async {
+    await _demoNotification(title, body);
+  }
+
+  Future<void> _demoNotification(String title, String body) async {
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+        'channel_ID', 'channel name', 'channel description',
+        importance: Importance.Max,
+        playSound: true,
+        // sound: 'sound',
+        showProgress: true,
+        priority: Priority.High,
+        ticker: 'test ticker');
+
+    var iOSChannelSpecifics = IOSNotificationDetails();
+    var platformChannelSpecifics = NotificationDetails(
+        androidPlatformChannelSpecifics, iOSChannelSpecifics);
+    await flutterLocalNotificationsPlugin
+        .show(0, title, body, platformChannelSpecifics, payload: 'test');
+  }
+
+  Future onSelectNotification(String payload) async {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (BuildContext context) => ListPage()));
   }
 
   @override
