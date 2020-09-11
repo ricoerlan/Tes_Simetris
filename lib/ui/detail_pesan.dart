@@ -1,36 +1,36 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
-
+import '../database/db/db_profider.dart';
+import '../database/db/db_profider.dart';
+import '../database/db/db_profider.dart';
 import '../model/pesan.dart';
-
-
 
 class DetailPage extends StatelessWidget {
   final Pesan pesan;
   final String author;
-  DetailPage({Key key, this.pesan, this.author}) : super (key : key);
+  final int isRead = 1;
 
+  DetailPage({Key key, this.pesan, this.author}) : super(key: key);
 
-  AssetImage getImage(String author){
-    if(author == 'Humas'){
+  AssetImage getImage(String author) {
+    if (author == 'Humas') {
       return AssetImage("assets/065-manager.png");
-    }else if(author == 'INSTI'){
+    } else if (author == 'INSTI') {
       return AssetImage("assets/030-mechanic.png");
-    }else if(author == 'Poliklinik'){
+    } else if (author == 'Poliklinik') {
       return AssetImage("assets/060-nurse.png");
-    }else{
+    } else {
       return AssetImage("assets/039-marketing.png");
     }
   }
 
- @override
+  @override
   Widget build(BuildContext context) {
+    final String id = pesan.id_message;
+    DBProvider.db.isRead(isRead, id);
 
-    print(author);
+    print('isRead : $pesan.isRead');
 
     final topContentText = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,20 +40,26 @@ class DetailPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: <Widget> [
-                  Text(
-                    pesan.tanggal,
-                    style: TextStyle(color : Colors.grey[300], fontSize : 12),),
-                  Text(
-                    pesan.waktu,
-                    style: TextStyle(color : Colors.grey[300], fontSize : 11))
-                ],
-              ),
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                Text(
+                  pesan.tanggal,
+                  style: TextStyle(color: Colors.grey[300], fontSize: 12),
+                ),
+                Text(pesan.waktu,
+                    style: TextStyle(color: Colors.grey[300], fontSize: 11))
+              ],
+            ),
           ],
         ),
-        SizedBox(height: 10.0,),
-        Center(child: CircleAvatar(backgroundImage: getImage(author), maxRadius: 45, )),
+        SizedBox(
+          height: 10.0,
+        ),
+        Center(
+            child: CircleAvatar(
+          backgroundImage: getImage(author),
+          maxRadius: 45,
+        )),
         Center(
           child: Container(
             width: 90.0,
@@ -67,7 +73,7 @@ class DetailPage extends StatelessWidget {
             style: TextStyle(color: Colors.white, fontSize: 15.0),
           ),
         ),
-        SizedBox(height : 10.0),
+        SizedBox(height: 10.0),
         Text(
           pesan.title,
           style: TextStyle(color: Colors.white, fontSize: 30.0),
@@ -76,16 +82,15 @@ class DetailPage extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            
             Expanded(
-              flex: 1,
-              child: Padding(
-                padding: EdgeInsets.only(bottom: 2.0),
-                child: Text(
-                  'Tipe Pesan : ',
-                  style: TextStyle(color: Colors.white),
-                ),
-              )),
+                flex: 1,
+                child: Padding(
+                  padding: EdgeInsets.only(bottom: 2.0),
+                  child: Text(
+                    'Tipe Pesan : ',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                )),
             Expanded(
                 flex: 3,
                 child: Padding(
@@ -96,12 +101,12 @@ class DetailPage extends StatelessWidget {
                     ))),
           ],
         ),
-        SizedBox(height: 10.0,),
-        
+        SizedBox(
+          height: 10.0,
+        ),
       ],
     );
 
-    
     final topContent = Stack(
       children: <Widget>[
         Container(
@@ -135,12 +140,10 @@ class DetailPage extends StatelessWidget {
       ],
     );
 
-
     final bottomContentText = Text(
       pesan.content,
       style: TextStyle(fontSize: 18.0),
     );
-
 
     final bottomContent = Container(
       //height: MediaQuery.of(context).size.height ,
@@ -158,11 +161,9 @@ class DetailPage extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
-          children: <Widget> [topContent, bottomContent],
+          children: <Widget>[topContent, bottomContent],
         ),
-        
       ),
-      
     );
   }
 }

@@ -59,7 +59,28 @@ class _ListPageState extends State<ListPage> {
     } else {
       return AssetImage("assets/039-marketing.png");
     }
-    ;
+  }
+
+  FontWeight isRead(int isRead) {
+    if (isRead == 1) {
+      return FontWeight.normal;
+    } else {
+      return FontWeight.bold;
+    }
+  }
+
+  Icon iconIsRead(int isRead) {
+    if (isRead == 1) {
+      return Icon(
+        Icons.mail,
+        color: Colors.grey,
+      );
+    } else {
+      return Icon(
+        Icons.mail,
+        color: Colors.green,
+      );
+    }
   }
 
   @override
@@ -119,6 +140,7 @@ class _ListPageState extends State<ListPage> {
                   width: 120.0,
                   child: Center(
                     child: ListTile(
+                      hoverColor: Colors.black,
                       //Header
                       leading: Container(
                           child: Column(
@@ -128,7 +150,8 @@ class _ListPageState extends State<ListPage> {
                                   getImage('${pesan[position].author}')),
                           Text(
                             '${pesan[position].author}',
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontWeight: isRead(pesan[position].isRead)),
                           )
                         ],
                       )),
@@ -138,12 +161,14 @@ class _ListPageState extends State<ListPage> {
                         style: TextStyle(
                             fontSize: 14.0,
                             color: Colors.black,
-                            fontWeight: FontWeight.bold),
+                            fontWeight: isRead(pesan[position].isRead)),
                       ),
 
                       subtitle: Text(
                         '${pesan[position].content}',
                         maxLines: 2,
+                        style: TextStyle(
+                            fontWeight: isRead(pesan[position].isRead)),
                       ),
 
                       // Footer
@@ -152,10 +177,16 @@ class _ListPageState extends State<ListPage> {
                           children: <Widget>[
                             Text(
                               '${pesan[position].tanggal}',
-                              style: TextStyle(fontSize: 10),
+                              style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: isRead(pesan[position].isRead)),
                             ),
                             Text('${pesan[position].waktu}',
-                                style: TextStyle(fontSize: 10)),
+                                style: TextStyle(
+                                    fontSize: 10,
+                                    fontWeight:
+                                        isRead(pesan[position].isRead))),
+                            iconIsRead(pesan[position].isRead)
                           ],
                         ),
                       ),

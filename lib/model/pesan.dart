@@ -15,6 +15,7 @@ class Pesan {
   String level;
   String waktu;
   String tanggal;
+  int isRead = 0;
 
   Pesan(
       {this.id_message,
@@ -24,19 +25,20 @@ class Pesan {
       this.author,
       this.level,
       this.waktu,
-      this.tanggal});
+      this.tanggal,
+      this.isRead});
 
   factory Pesan.fromJson(Map<String, dynamic> json) {
     return Pesan(
-      id_message: json["id_message"],
-      id_sk: json["id_sk"],
-      title: json["title"],
-      content: json["content"],
-      author: json["author"],
-      level: json["level"],
-      waktu: json["waktu"],
-      tanggal: json["tanggal"],
-    );
+        id_message: json["id_message"],
+        id_sk: json["id_sk"],
+        title: json["title"],
+        content: json["content"],
+        author: json["author"],
+        level: json["level"],
+        waktu: json["waktu"],
+        tanggal: json["tanggal"],
+        isRead: json["isRead"]);
   }
 
   Map<String, dynamic> toJson() => {
@@ -47,6 +49,7 @@ class Pesan {
         "author": author,
         "level": level,
         "waktu": waktu,
-        "tanggal": tanggal
+        "tanggal": tanggal,
+        "isRead": isRead
       };
 }

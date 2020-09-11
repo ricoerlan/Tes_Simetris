@@ -27,10 +27,10 @@ class DBProvider {
   //membuat database pesan
   initDB() async {
     Directory documentsDirectory = await getApplicationSupportDirectory();
-    final path = join(documentsDirectory.path, 'pesan_manager.db');
+    final path = join(documentsDirectory.path, 'ppesan_manager.db');
     return await openDatabase(path, version: 1, onOpen: (db) {},
         onCreate: (Database db, int version) async {
-      await db.execute('CREATE TABLE pesann('
+      await db.execute('CREATE TABLE ppesan('
           'id_message TEXT PRIMARY KEY,'
           'id_sk TEXT, '
           'title TEXT, '
@@ -38,16 +38,17 @@ class DBProvider {
           'author TEXT, '
           'level TEXT, '
           'waktu TEXT, '
-          'tanggal TEXT '
+          'tanggal TEXT, '
+          'isRead INT'
           ')');
     });
   }
 
   //insert pesan on database
   createPesan(Pesan newPesan) async {
-    await deleteAllPesan();
+    //await deleteAllPesan();
     final db = await database;
-    final res = await db.insert('Pesann', newPesan.toJson());
+    final res = await db.insert('ppesan', newPesan.toJson());
 
     return res;
   }
@@ -56,7 +57,7 @@ class DBProvider {
   Future<int> deleteAllPesan() async {
     final db = await database;
     print("before : $db");
-    final res = db.rawDelete('DELETE FROM Pesann');
+    final res = db.rawDelete('DELETE FROM ppesan');
     // final res = await db.rawDelete('DELETE * FROM Pesann');
     print("after : $db");
     return res;
@@ -65,11 +66,19 @@ class DBProvider {
   //select pesan
   Future<List<Pesan>> getAllPesan() async {
     final db = await database;
-    final res = await db.rawQuery('SELECT * FROM Pesann');
+    final res = await db.rawQuery('SELECT * FROM ppesan');
 
     List<Pesan> list =
         res.isNotEmpty ? res.map((e) => Pesan.fromJson(e)).toList() : [];
 
     return list;
+  }
+
+  Future isRead(int isread, String id) async {
+    final db = await database;
+    final res = await db.rawUpdate(
+        'UPDATE ppesan SET isRead = ' '$isread' ' WHERE id_message = $id');
+
+    print(res);
   }
 }
