@@ -11,7 +11,7 @@ class PesanApiProvider {
 
   String id_sk = "2";
 
-  Future<List<Pesan>> getAllPesan() async {
+  Future<List<Pesan>> getAllRemoteData() async {
     var url = "http://jogjamotor24jam.com/getAllMessages.php?id_sk=$id_sk";
     var res = await http.get(Uri.encodeFull(url));
     print(res.body);

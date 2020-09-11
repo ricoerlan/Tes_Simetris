@@ -75,7 +75,7 @@ class _ListPageState extends State<ListPage> {
   _loadFromApi() async {
     
     var apiProvider = PesanApiProvider();
-    await apiProvider.getAllPesan();
+    await apiProvider.getAllRemoteData();
 
     // wait for 2 seconds to simulate loading of data
     await Future.delayed(const Duration(seconds: 2));

@@ -17,23 +17,23 @@ class DBProvider{
 
   Future<Database> get database async{
     //jika databes ada , maka mengembalikan database 
-    if (_database != null ) return _database;
-
-    //jika database tidak ada , maka membuat database 
-    _database = await initDB();
-
+    if (_database != null ) {
+      return _database;
+    }  else {
+      //jika database tidak ada , maka membuat database
+      _database = await initDB();
     return _database;
+    }
+     
   }
 
 
-  //inital database pesan
-
+  //membuat database pesan
   initDB() async{
-
     Directory documentsDirectory = await getApplicationSupportDirectory();
     final path = join(documentsDirectory.path, 'pesan_manager.db');
-
     return await openDatabase(path, version : 1 , onOpen : (db) {},
+
     onCreate: (Database db, int version) async {
       await db.execute('CREATE TABLE pesann('
         'id_message TEXT PRIMARY KEY,'
@@ -51,7 +51,7 @@ class DBProvider{
 
   //insert pesan on database 
   createPesan(Pesan newPesan) async{
-    await deleteAllPesan();
+    //await deleteAllPesan();
     final db = await database;
     final res = await db.insert('Pesann', newPesan.toJson());
 
@@ -66,6 +66,8 @@ class DBProvider{
     return res; 
   }
 
+
+  //select pesan 
   Future<List<Pesan>> getAllPesan()async {
     final db = await database;
     final res = await db.rawQuery('SELECT * FROM Pesann');
