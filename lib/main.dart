@@ -52,18 +52,22 @@ class _LoginState extends State<Login> {
     final data = jsonDecode(response.body);
     int value = data['value'];
     String pesan = data['message'];
-    String emailAPI = data['email'];
-    String namaAPI = data['nama'];
-    String id = data['id'];
+    String email_user = email;
+    String nama_user = data['nama'];
+    String id_user = data['id_user'];
+    String id_sk = data['id_sk'];
     if (value == 1) {
       setState(() {
         _loginStatus = LoginStatus.signIn;
-        savePref(value, emailAPI, namaAPI, id);
+        savePref(value, id_user, id_sk, nama_user, email_user);
       });
 
       _firebaseMessaging.getToken().then((token) {
         print("firebase tokens : $token");
-        print("email : $email ");
+        print("email : $email_user ");
+        print("nama : $nama_user ");
+        print("id : $id_user ");
+        print("id_sk : $id_sk ");
 
         final responses = http.post(
             "http://jogjamotor24jam.com/updateDeviceToken.php",
@@ -82,13 +86,20 @@ class _LoginState extends State<Login> {
     }
   }
 
-  savePref(int value, String email, String nama, String id) async {
+  savePref(
+    int value,
+    String id_user,
+    String id_sk,
+    String nama,
+    String email,
+  ) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
       preferences.setInt("value", value);
+      preferences.setString("id_user", id_user);
+      preferences.setString("id_sk", id_sk);
       preferences.setString("nama", nama);
       preferences.setString("email", email);
-      preferences.setString("id", id);
       preferences.commit();
     });
   }

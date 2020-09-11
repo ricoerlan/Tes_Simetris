@@ -29,12 +29,18 @@ class _MainMenuState extends State<MainMenu> {
 //  String email = "", nama = "";
 //  TabController tabController;
 
+  var email;
+  var nama;
+  var id_sk;
+
   getPref() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
-//      email = preferences.getString("email");
-//      nama = preferences.getString("nama");
+      email = preferences.getString("email");
+      nama = preferences.getString("nama");
+      id_sk = preferences.getString("id_sk");
     });
+    print(email);
   }
 
   @override
@@ -42,13 +48,17 @@ class _MainMenuState extends State<MainMenu> {
     // TODO: implement initState
     super.initState();
     getPref();
+    print(email);
+    print(id_sk);
   }
 
   @override
   Widget build(BuildContext context) {
     final _listPage = <Widget>[
       Dashboard(),
-      ListPage(title: 'Halaman Pesan',),
+      ListPage(
+        title: 'Halaman Pesan',
+      ),
       Text('Halaman Profile'),
     ];
 
