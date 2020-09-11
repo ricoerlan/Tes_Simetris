@@ -104,26 +104,5 @@ class _MainMenuState extends State<MainMenu> {
       bottomNavigationBar: _bottomNavBar,
     );
 
-    // @override
-    // Widget build(BuildContext context) {
-    //   return DefaultTabController(
-    //     length: 4,
-    //     child: Scaffold(
-    //         appBar: AppBar(
-    //           title: Text("Halaman Dashboard"),
-    //           actions: <Widget>[
-    //             IconButton(
-    //               onPressed: () {
-    //                 signOut();
-    //               },
-    //               icon: Icon(Icons.lock_open),
-    //             )
-    //           ],
-    //         ),
-    //         body: Center(
-    //           child: Text("Dashboard"),
-    //         )),
-    //   );
-    // }
   }
 }
