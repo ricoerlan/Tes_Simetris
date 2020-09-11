@@ -35,6 +35,8 @@ class _LoginState extends State<Login> {
 
   bool _secureText = true;
 
+  
+
   showHide() {
     setState(() {
       _secureText = !_secureText;
