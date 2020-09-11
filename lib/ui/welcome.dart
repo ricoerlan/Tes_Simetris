@@ -4,9 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-import '../database/db/pesan_api_provider.dart';
-import '../database/db/pesan_api_provider.dart';
-
 class Welcome extends StatefulWidget {
   @override
   _WelcomeState createState() => _WelcomeState();
