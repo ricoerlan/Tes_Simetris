@@ -10,10 +10,7 @@ import 'package:tes_simetris/base/home.dart';
 import 'package:tes_simetris/ui/pesan_page.dart';
 
 void main() {
-  runApp(MaterialApp(
-    home: Login(),
-    theme: ThemeData(),
-  ));
+  runApp(MaterialApp(home: Login(), theme: ThemeData()));
 }
 
 class Login extends StatefulWidget {
@@ -143,10 +140,13 @@ class _LoginState extends State<Login> {
       },
       onLaunch: (Map<String, dynamic> message) async {
         print("onLaunch: $message");
-        Navigator.pushNamed(context, '/notify');
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (BuildContext context) => ListPage()));
       },
       onResume: (Map<String, dynamic> message) async {
         print("onResume: $message");
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (BuildContext context) => ListPage()));
       },
     );
   }
