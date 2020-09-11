@@ -6,8 +6,8 @@ List<Pesan> employeeFromJson(String str) =>
 String employeeToJson(List<Pesan> data) =>
     json.encode(List<dynamic>.from(data.map((x) => jsonEncode(x))));
 
-class Pesan{
-  String id_message ;
+class Pesan {
+  String id_message;
   String id_sk;
   String title;
   String content;
@@ -15,26 +15,28 @@ class Pesan{
   String level;
   String waktu;
   String tanggal;
-  
-
 
   Pesan(
-    {this.id_message, this.id_sk, this.title, this.content, this.author, this.level, this.waktu, this.tanggal}
-  );
+      {this.id_message,
+      this.id_sk,
+      this.title,
+      this.content,
+      this.author,
+      this.level,
+      this.waktu,
+      this.tanggal});
 
   factory Pesan.fromJson(Map<String, dynamic> json) {
-    return Pesan (
-      id_message : json["id_message"],
-      id_sk : json["id_sk"],
-      title : json["title"],
-      content: json ["content"],
-      author: json ["author"],
-      level : json["level"],
+    return Pesan(
+      id_message: json["id_message"],
+      id_sk: json["id_sk"],
+      title: json["title"],
+      content: json["content"],
+      author: json["author"],
+      level: json["level"],
       waktu: json["waktu"],
-      tanggal : json["tanggal"],
-      
-      );
-
+      tanggal: json["tanggal"],
+    );
   }
 
   Map<String, dynamic> toJson() => {
@@ -45,6 +47,6 @@ class Pesan{
         "author": author,
         "level": level,
         "waktu": waktu,
+        "tanggal": tanggal
       };
-
 }

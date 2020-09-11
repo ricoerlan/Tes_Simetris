@@ -1,21 +1,14 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tes_simetris/database/db/db_profider.dart';
 import 'package:tes_simetris/database/db/pesan_api_provider.dart';
 import 'package:tes_simetris/ui/detail_pesan.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../model/pesan.dart';
 
 class ListPage extends StatefulWidget {
-
-
-   final String title ;
-
-  ListPage({Key key, this.title,}) : super (key : key);
-
+  final String title;
 
   ListPage({
     Key key,
@@ -34,18 +27,14 @@ class _ListPageState extends State<ListPage> {
   //   this.id_sk = id_sk;
   // }
 
-
-  
   // Future<List<Pesan>> getData () async{
 
   //   List<Pesan> list;
-
 
   //   String link = "http://jogjamotor24jam.com/getAllMessages.php?id_sk=$id_sk";
 
   //   var res = await http.get(Uri.encodeFull(link));
   //   print(res.body);
-
 
   //   if (res.statusCode == 200){
   //     var data = json.decode(res.body);
@@ -54,15 +43,11 @@ class _ListPageState extends State<ListPage> {
 
   //     list = rest.map<Pesan>((json) => Pesan.fromJson(json)).toList();
   //   }
-    
+
   //   print("List Size: ${list.length}");
   //   return list;
 
   // }
-
-
-
-   
 
   AssetImage getImage(String author) {
     if (author == 'Humas') {
@@ -81,7 +66,7 @@ class _ListPageState extends State<ListPage> {
   void initState() {
     super.initState();
     getPref();
-   _loadFromApi();
+    _loadFromApi();
   }
 
   var email;
@@ -96,18 +81,16 @@ class _ListPageState extends State<ListPage> {
       id_sk = preferences.getString("id_sk");
     });
     print("id_sk pref :  $id_sk");
+
     // print("email : $email
   }
-  
+
   _loadFromApi() async {
-    
     var apiProvider = PesanApiProvider();
     await apiProvider.getAllRemoteData();
 
     // wait for 2 seconds to simulate loading of data
     await Future.delayed(const Duration(seconds: 2));
-
-  }
   }
 
   @override
@@ -123,7 +106,6 @@ class _ListPageState extends State<ListPage> {
     }
 
     Widget listViewWidget(List<Pesan> pesan) {
-  
       print(pesan.length);
       return Container(
         child: ListView.builder(
@@ -144,7 +126,6 @@ class _ListPageState extends State<ListPage> {
                           CircleAvatar(
                               backgroundImage:
                                   getImage('${pesan[position].author}')),
-
                           Text(
                             '${pesan[position].author}',
                             style: TextStyle(fontWeight: FontWeight.bold),

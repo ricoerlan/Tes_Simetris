@@ -4,6 +4,9 @@ import 'package:tes_simetris/custome/color.dart';
 import 'package:tes_simetris/ui/dashboard.dart';
 import 'package:tes_simetris/ui/pesan_page.dart';
 
+import '../database/db/db_profider.dart';
+import '../database/db/db_profider.dart';
+
 class MainMenu extends StatefulWidget {
   final VoidCallback signOut;
   MainMenu(this.signOut);
@@ -13,6 +16,9 @@ class MainMenu extends StatefulWidget {
 
 class _MainMenuState extends State<MainMenu> {
   signOut() {
+    // DBProvider dbProvider;
+    // dbProvider.deleteAllPesan();
+    DBProvider.db.deleteAllPesan();
     setState(() {
       widget.signOut();
     });
@@ -103,6 +109,5 @@ class _MainMenuState extends State<MainMenu> {
       body: Center(child: _listPage[_selectedTabIndex]),
       bottomNavigationBar: _bottomNavBar,
     );
-
   }
 }
