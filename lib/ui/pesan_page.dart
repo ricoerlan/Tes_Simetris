@@ -23,32 +23,6 @@ class _ListPageState extends State<ListPage> {
   String iconUrl;
   String id_sk;
 
-  // void getId(String id_sk){
-  //   this.id_sk = id_sk;
-  // }
-
-  // Future<List<Pesan>> getData () async{
-
-  //   List<Pesan> list;
-
-  //   String link = "http://jogjamotor24jam.com/getAllMessages.php?id_sk=$id_sk";
-
-  //   var res = await http.get(Uri.encodeFull(link));
-  //   print(res.body);
-
-  //   if (res.statusCode == 200){
-  //     var data = json.decode(res.body);
-  //     var rest = data as List;
-  //     print(rest);
-
-  //     list = rest.map<Pesan>((json) => Pesan.fromJson(json)).toList();
-  //   }
-
-  //   print("List Size: ${list.length}");
-  //   return list;
-
-  // }
-
   AssetImage getImage(String author) {
     if (author == 'Humas') {
       return AssetImage("assets/065-manager.png");
@@ -117,6 +91,7 @@ class _ListPageState extends State<ListPage> {
   @override
   Widget build(BuildContext context) {
     void _onTapItem(BuildContext context, Pesan pesan, String author) {
+      _loadFromApi();
       Navigator.of(context).push(MaterialPageRoute(
           builder: (BuildContext context) => DetailPage(
                 pesan: pesan,
@@ -128,6 +103,7 @@ class _ListPageState extends State<ListPage> {
 
     Widget listViewWidget(List<Pesan> pesan) {
       print(pesan.length);
+
       return Container(
         child: ListView.builder(
             itemCount: pesan.length,
@@ -209,6 +185,7 @@ class _ListPageState extends State<ListPage> {
               ? listViewWidget(snapshot.data)
               : Center(
                   child: SpinKitPouringHourglass(
+                  duration: Duration(seconds: 10),
                   color: Colors.blue,
                   size: 100,
                 ));

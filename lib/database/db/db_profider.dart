@@ -46,7 +46,7 @@ class DBProvider {
 
   //insert pesan on database
   createPesan(Pesan newPesan) async {
-    await deleteAllPesan();
+    // await deleteAllPesan();
     final db = await database;
     final res = await db.insert('ppesan', newPesan.toJson());
 

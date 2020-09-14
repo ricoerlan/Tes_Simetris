@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tes_simetris/database/db/pesan_api_provider.dart';
 
 import '../database/db/db_profider.dart';
 import '../database/db/db_profider.dart';
@@ -29,6 +30,10 @@ class DetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final String id = pesan.id_message;
     DBProvider.db.isRead(isRead, id);
+
+    DBProvider.db.getAllPesan();
+
+    // wait for 2 seconds to simulate loading of data
 
     print('isRead : $pesan.isRead');
 

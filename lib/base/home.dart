@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tes_simetris/custome/color.dart';
 import 'package:tes_simetris/ui/dashboard.dart';
 import 'package:tes_simetris/ui/pesan_page.dart';
+import 'package:tes_simetris/ui/profile_page.dart';
 
 import '../database/db/db_profider.dart';
 import '../database/db/db_profider.dart';
@@ -30,6 +31,16 @@ class _MainMenuState extends State<MainMenu> {
     setState(() {
       _selectedTabIndex = index;
     });
+  }
+
+  Text getTitle() {
+    if (_selectedTabIndex == 0) {
+      return Text('Dashboard');
+    } else if (_selectedTabIndex == 1) {
+      return Text('Pesan');
+    } else {
+      return Text('Profile');
+    }
   }
 
 //  String email = "", nama = "";
@@ -65,7 +76,7 @@ class _MainMenuState extends State<MainMenu> {
       ListPage(
         title: 'Halaman Pesan',
       ),
-      Text('Halaman Profile'),
+      Profile()
     ];
 
     final _bottomNavBarItems = <BottomNavigationBarItem>[
@@ -84,17 +95,17 @@ class _MainMenuState extends State<MainMenu> {
     ];
 
     final _bottomNavBar = BottomNavigationBar(
-      backgroundColor: AppColors.colorPrimaryDark,
+      backgroundColor: AppColors.lightBlue,
       items: _bottomNavBarItems,
       currentIndex: _selectedTabIndex,
       selectedItemColor: Colors.white,
-      unselectedItemColor: Colors.blue[900],
+      unselectedItemColor: Colors.black,
       onTap: _onNavBarTapped,
     );
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Simetris'),
+        title: getTitle(),
         centerTitle: true,
         backgroundColor: Colors.blue,
         actions: [

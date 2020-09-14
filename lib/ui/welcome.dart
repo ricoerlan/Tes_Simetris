@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:tes_simetris/ui/detail_pesan.dart';
+import 'package:tes_simetris/ui/pesan_page.dart';
 
 class Welcome extends StatefulWidget {
   @override
@@ -11,11 +13,12 @@ class Welcome extends StatefulWidget {
 
 class _WelcomeState extends State<Welcome> {
   void navigationPage() {
-    Navigator.of(context).pushReplacementNamed('/login');
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (BuildContext context) => ListPage()));
   }
 
   startTime() async {
-    var _duration = Duration(seconds: 4);
+    var _duration = Duration(seconds: 1);
     return Timer(_duration, navigationPage);
   }
 
