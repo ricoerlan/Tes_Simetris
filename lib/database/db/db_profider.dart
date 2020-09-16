@@ -10,6 +10,7 @@ import 'package:tes_simetris/model/pesan.dart';
 class DBProvider {
   static Database _database;
   static final DBProvider db = DBProvider._();
+  var ListPesan;
 
   DBProvider._();
 
@@ -66,10 +67,13 @@ class DBProvider {
   //select pesan
   Future<List<Pesan>> getAllPesan() async {
     final db = await database;
-    final res = await db.rawQuery('SELECT * FROM ppesan');
+    final res =
+        await db.rawQuery('SELECT * FROM ppesan ORDER BY id_message DESC');
 
     List<Pesan> list =
         res.isNotEmpty ? res.map((e) => Pesan.fromJson(e)).toList() : [];
+
+    ListPesan = list;
 
     return list;
   }

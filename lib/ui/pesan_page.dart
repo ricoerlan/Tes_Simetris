@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tes_simetris/database/db/db_profider.dart';
 import 'package:tes_simetris/database/db/pesan_api_provider.dart';
+import 'package:tes_simetris/services/firebase_notification.dart';
 import 'package:tes_simetris/ui/detail_pesan.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-
+import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
 import '../model/pesan.dart';
 
 class ListPage extends StatefulWidget {
@@ -21,7 +22,7 @@ class ListPage extends StatefulWidget {
 
 class _ListPageState extends State<ListPage> {
   String iconUrl;
-  String id_sk;
+  int id_sk = 2;
 
   AssetImage getImage(String author) {
     if (author == 'Humas') {
@@ -60,7 +61,8 @@ class _ListPageState extends State<ListPage> {
   @override
   void initState() {
     super.initState();
-    getPref();
+    // Firebasess(context: context).initNotifications();
+    // getPref();
     _loadFromApi();
   }
 
@@ -68,17 +70,17 @@ class _ListPageState extends State<ListPage> {
   var nama;
   // var id_sk;
 
-  getPref() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    setState(() {
-      // email = preferences.getString("email");
-      // nama = preferences.getString("nama");
-      id_sk = preferences.getString("id_sk");
-    });
-    print("id_sk pref :  $id_sk");
+  // getPref() async {
+  //   SharedPreferences preferences = await SharedPreferences.getInstance();
+  //   setState(() {
+  //     // email = preferences.getString("email");
+  //     // nama = preferences.getString("nama");
+  //     id_sk = preferences.getString("id_sk");
+  //   });
+  //   print("id_sk pref :  $id_sk");
 
-    // print("email : $email
-  }
+  //   // print("email : $email
+  // }
 
   _loadFromApi() async {
     var apiProvider = PesanApiProvider();
@@ -185,13 +187,29 @@ class _ListPageState extends State<ListPage> {
               ? listViewWidget(snapshot.data)
               : Center(
                   child: SpinKitPouringHourglass(
-                  duration: Duration(seconds: 10),
                   color: Colors.blue,
                   size: 100,
                 ));
         },
       ),
-      //body: makeBody,
+      // body: makeBody,
     );
+
+    // return Scaffold(
+    //   backgroundColor: Colors.blue[50],
+    //   body: FutureBuilder(
+    //     future: DBProvider.db.getAllPesan(),
+    //     builder: (context, snapshot) {
+    //       return snapshot.data != null
+    //           ? listViewWidget(snapshot.data)
+    //           : Center(
+    //               child: SpinKitPouringHourglass(
+    //               color: Colors.blue,
+    //               size: 100,
+    //             ));
+    //     },
+    //   ),
+    //   // body: makeBody,
+    // );
   }
 }

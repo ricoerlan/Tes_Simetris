@@ -16,6 +16,8 @@ class PesanApiProvider {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     id_sk = preferences.getString("id_sk");
 
+    // id_sk = "2";
+
     var url = "http://jogjamotor24jam.com/getAllMessages.php?id_sk=$id_sk";
     var res = await http.get(Uri.encodeFull(url));
     print(res.body);

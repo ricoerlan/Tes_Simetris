@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tes_simetris/base/home.dart';
 import 'package:tes_simetris/database/db/pesan_api_provider.dart';
+import 'package:tes_simetris/ui/pesan_page.dart';
 
 import '../database/db/db_profider.dart';
 import '../database/db/db_profider.dart';
@@ -138,6 +140,9 @@ class DetailPage extends StatelessWidget {
           child: InkWell(
             onTap: () {
               Navigator.pop(context);
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  builder: (BuildContext context) => MainMenu(selectTab: 1)));
+              // Navigator.pop(context);
             },
             child: Icon(Icons.arrow_back, color: Colors.white),
           ),
@@ -163,10 +168,20 @@ class DetailPage extends StatelessWidget {
       ),
     );
 
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[topContent, bottomContent],
+    Future<bool> _onBackPressed() {
+      Navigator.pop(context);
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (BuildContext context) => MainMenu(selectTab: 1)));
+      // Navigator.pop(context);
+    }
+
+    return WillPopScope(
+      onWillPop: _onBackPressed,
+      child: new Scaffold(
+        body: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[topContent, bottomContent],
+          ),
         ),
       ),
     );
