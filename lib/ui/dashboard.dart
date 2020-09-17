@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tes_simetris/custome/color.dart';
-import 'package:tes_simetris/services/firebase_notification.dart';
 
 class Dashboard extends StatefulWidget {
   @override

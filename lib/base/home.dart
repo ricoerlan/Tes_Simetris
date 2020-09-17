@@ -112,12 +112,31 @@ class _MainMenuState extends State<MainMenu> {
       DBProvider.db.deleteAllPesan();
       SharedPreferences preferences = await SharedPreferences.getInstance();
       setState(() {
-        preferences.setInt("status", null);
+        preferences.setInt("STATUS", null);
         preferences.commit();
         _loginStatus = LoginStatus.notSignIn;
       });
-      Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (BuildContext context) => Login()));
+      // Navigator.of(context).pushReplacement(
+      //     MaterialPageRoute(builder: (BuildContext context) => Login()));
+
+      Navigator.pushAndRemoveUntil(
+          context,
+          PageRouteBuilder(pageBuilder: (BuildContext context,
+              Animation animation, Animation secondaryAnimation) {
+            return Login();
+          }, transitionsBuilder: (BuildContext context,
+              Animation<double> animation,
+              Animation<double> secondaryAnimation,
+              Widget child) {
+            return new SlideTransition(
+              position: new Tween<Offset>(
+                begin: const Offset(1.0, 0.0),
+                end: Offset.zero,
+              ).animate(animation),
+              child: child,
+            );
+          }),
+          (Route route) => false);
     }
 
     return Scaffold(

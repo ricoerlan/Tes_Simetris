@@ -21,14 +21,18 @@ class Login extends StatefulWidget {
 enum LoginStatus { notSignIn, signIn }
 
 class _LoginState extends State<Login> {
-  int status;
+  int STATUS;
 
-  String email, password, MP_NAMA, MPG_NAMA_GELAR, MPG_NAMA, MP_UNIT, USERNAME;
+  String MU_USERNAME,
+      MU_PASSWORD,
+      MP_NAMA,
+      MPG_NAMA_GELAR,
+      MPG_NAMA,
+      MP_UNIT,
+      USERNAME;
 
   var MU_NIP,
       MPG_NIP,
-      MU_USERNAME,
-      MU_PASSWORD,
       MPG_HANDKEY,
       MP_NIP,
       MPG_HP,
@@ -178,38 +182,47 @@ class _LoginState extends State<Login> {
   login() async {
     final response = await http.post(
         "http://jogjamotor24jam.com/login_simetris.php",
-        body: {"email": email, "password": password});
+        body: {"MU_USERNAME": MU_USERNAME, "MU_PASSWORD": MU_PASSWORD});
     final data = jsonDecode(response.body);
-    status = data['status'];
-    String id_sk = data['id_sk'];
-    String message = data['message'];
-    if (status == 1) {
+    STATUS = data['STATUS'];
+    String MESSAGE = data['MESSAGE'];
+    String ID_USER = data['ID_USER'];
+    String ID_SK = data['ID_SK'];
+    MP_UNIT = data['MP_UNIT'];
+    MP_NAMA = data['MP_NAMA'];
+    MU_NIP = data['MU_NIP'];
+    MPG_HP = data['MPG_HP'];
+    if (STATUS == 1) {
       setState(() {
         _loginStatus = LoginStatus.signIn;
-        savePref(status, id_sk);
+        savePref(STATUS, ID_USER, ID_SK, MP_UNIT, MP_NAMA, MU_NIP, MPG_HP);
       });
 
       _firebaseMessaging.getToken().then((token) {
         print("firebase tokens : $token");
-
-        print("id_sk: $id_sk");
+        print("ID_SK: $ID_SK");
 
         final responses = http.post(
             "http://jogjamotor24jam.com/updateDeviceToken.php",
-            body: {"email": email, "DeviceToken": token});
+            body: {"MU_USERNAME": MU_USERNAME, "DEVICE_TOKEN": token});
       });
-
-      print(message);
+      print(MESSAGE);
     } else {
-      print(message);
+      print(MESSAGE);
     }
   }
 
-  savePref(int status, String id_sk) async {
+  savePref(int STATUS, String ID_USER, ID_SK, MP_UNIT, MP_NAMA, MU_NIP,
+      MPG_HP) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
-      preferences.setInt("status", status);
-      preferences.setString("id_sk", id_sk);
+      preferences.setInt("STATUS", STATUS);
+      preferences.setString("ID_USER", ID_USER);
+      preferences.setString("ID_SK", ID_SK);
+      preferences.setString("MP_UNIT", MP_UNIT);
+      preferences.setString("MP_NAMA", MP_NAMA);
+      preferences.setString("MU_NIP", MU_NIP);
+      preferences.setString("MPG_HP", MPG_HP);
       preferences.commit();
     });
   }
@@ -295,16 +308,16 @@ class _LoginState extends State<Login> {
   getPref() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
-      status = preferences.getInt("status");
+      STATUS = preferences.getInt("STATUS");
 
-      _loginStatus = status == 1 ? LoginStatus.signIn : LoginStatus.notSignIn;
+      _loginStatus = STATUS == 1 ? LoginStatus.signIn : LoginStatus.notSignIn;
     });
   }
 
   signOut() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
-      preferences.setInt("status", null);
+      preferences.setInt("STATUS", null);
       preferences.commit();
       _loginStatus = LoginStatus.notSignIn;
     });
@@ -336,17 +349,17 @@ class _LoginState extends State<Login> {
                 TextFormField(
                   validator: (e) {
                     if (e.isEmpty) {
-                      return "Please insert email";
+                      return "Please insert Username";
                     }
                   },
-                  onSaved: (e) => email = e,
+                  onSaved: (e) => MU_USERNAME = e,
                   decoration: InputDecoration(
-                    labelText: "username",
+                    labelText: "Username",
                   ),
                 ),
                 TextFormField(
                   obscureText: _secureText,
-                  onSaved: (e) => password = e,
+                  onSaved: (e) => MU_PASSWORD = e,
                   decoration: InputDecoration(
                     labelText: "Password",
                     suffixIcon: IconButton(

@@ -44,8 +44,27 @@ class Firebasess {
       onResume: (Map<String, dynamic> message) async {
         print("onResume: $message");
         apiProvider.getAllRemoteData();
-        Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (BuildContext context) => MainMenu(selectTab: 1)));
+        // Navigator.of(context).pushReplacement(MaterialPageRoute(
+        //     builder: (BuildContext context) => MainMenu(selectTab: 1)));
+
+        Navigator.pushAndRemoveUntil(
+            context,
+            PageRouteBuilder(pageBuilder: (BuildContext context,
+                Animation animation, Animation secondaryAnimation) {
+              return MainMenu(selectTab: 1);
+            }, transitionsBuilder: (BuildContext context,
+                Animation<double> animation,
+                Animation<double> secondaryAnimation,
+                Widget child) {
+              return new SlideTransition(
+                position: new Tween<Offset>(
+                  begin: const Offset(1.0, 0.0),
+                  end: Offset.zero,
+                ).animate(animation),
+                child: child,
+              );
+            }),
+            (Route route) => false);
       },
     );
   }
@@ -73,7 +92,26 @@ class Firebasess {
 
   Future onSelectNotification(String payload) async {
     apiProvider.getAllRemoteData();
-    Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (BuildContext context) => MainMenu(selectTab: 1)));
+    // Navigator.of(context).pushReplacement(MaterialPageRoute(
+    //     builder: (BuildContext context) => MainMenu(selectTab: 1)));
+
+    Navigator.pushAndRemoveUntil(
+        context,
+        PageRouteBuilder(pageBuilder: (BuildContext context,
+            Animation animation, Animation secondaryAnimation) {
+          return MainMenu(selectTab: 1);
+        }, transitionsBuilder: (BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+            Widget child) {
+          return new SlideTransition(
+            position: new Tween<Offset>(
+              begin: const Offset(1.0, 0.0),
+              end: Offset.zero,
+            ).animate(animation),
+            child: child,
+          );
+        }),
+        (Route route) => false);
   }
 }

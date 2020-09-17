@@ -9,7 +9,7 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  String MP_NIP, MP_NAMA, MP_UNIT, MPG_HP;
+  String MU_NIP, MP_NAMA, MP_UNIT, MPG_HP;
 
   @override
   void initState() {
@@ -20,7 +20,7 @@ class _ProfileState extends State<Profile> {
   getPref() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
-      MP_NIP = preferences.getString("MP_NIP");
+      MU_NIP = preferences.getString("MU_NIP");
       MP_NAMA = preferences.getString("MP_NAMA");
       MP_UNIT = preferences.getString("MP_UNIT");
       MPG_HP = preferences.getString("MPG_HP");
@@ -30,7 +30,7 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: MP_NIP != null
+        body: MP_NAMA != null
             ? profileView()
             : Center(
                 child: SpinKitChasingDots(
@@ -46,7 +46,7 @@ class _ProfileState extends State<Profile> {
     return Column(
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.fromLTRB(0, 15, 0, 20),
+          padding: const EdgeInsets.fromLTRB(0, 40, 0, 20),
           child: Stack(
             children: <Widget>[
               CircleAvatar(
@@ -135,7 +135,7 @@ class _ProfileState extends State<Profile> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        MP_NIP,
+                        MU_NIP,
                         style: TextStyle(color: Colors.black),
                       ),
                     ),

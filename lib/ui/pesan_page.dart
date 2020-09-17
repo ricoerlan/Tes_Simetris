@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:tes_simetris/database/db/db_profider.dart';
 import 'package:tes_simetris/database/db/pesan_api_provider.dart';
 import 'package:tes_simetris/services/firebase_notification.dart';
 import 'package:tes_simetris/ui/detail_pesan.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
 import '../model/pesan.dart';
 
 class ListPage extends StatefulWidget {
@@ -186,30 +186,61 @@ class _ListPageState extends State<ListPage> {
           return snapshot.data != null
               ? listViewWidget(snapshot.data)
               : Center(
-                  child: SpinKitPouringHourglass(
-                  color: Colors.blue,
-                  size: 100,
-                ));
+                  child: Expanded(
+                      child: Shimmer.fromColors(
+                  baseColor: Colors.blueGrey[100],
+                  highlightColor: Colors.white,
+                  enabled: true,
+                  child: ListView.builder(
+                    itemBuilder: (_, __) => Padding(
+                      padding: EdgeInsets.fromLTRB(10, 25, 10, 30),
+                      // padding: const EdgeInsets.only(bottom: 20.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: 48.0,
+                            height: 48.0,
+                            color: Colors.white,
+                          ),
+                          const Padding(
+                            // padding: EdgeInsets.fromLTRB(10, 10, 20, 10)
+                            padding: EdgeInsets.symmetric(horizontal: 15.0),
+                          ),
+                          Expanded(
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Container(
+                                    width: double.infinity,
+                                    height: 12.0,
+                                    color: Colors.white,
+                                  ),
+                                  const Padding(
+                                    // padding: EdgeInsets.only(top: 20)
+                                    padding:
+                                        EdgeInsets.symmetric(vertical: 4.0),
+                                  ),
+                                  Container(
+                                    width: double.infinity,
+                                    height: 30.0,
+                                    color: Colors.white,
+                                  ),
+                                  const Padding(
+                                    // padding: EdgeInsets.only(top: 5)
+                                    padding:
+                                        EdgeInsets.symmetric(vertical: 2.0),
+                                  ),
+                                ]),
+                          )
+                        ],
+                      ),
+                    ),
+                    itemCount: 6,
+                  ),
+                )));
         },
       ),
-      // body: makeBody,
     );
-
-    // return Scaffold(
-    //   backgroundColor: Colors.blue[50],
-    //   body: FutureBuilder(
-    //     future: DBProvider.db.getAllPesan(),
-    //     builder: (context, snapshot) {
-    //       return snapshot.data != null
-    //           ? listViewWidget(snapshot.data)
-    //           : Center(
-    //               child: SpinKitPouringHourglass(
-    //               color: Colors.blue,
-    //               size: 100,
-    //             ));
-    //     },
-    //   ),
-    //   // body: makeBody,
-    // );
   }
 }
