@@ -30,6 +30,7 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.blue[50],
         body: MP_NAMA != null
             ? profileView()
             : Center(
@@ -82,7 +83,7 @@ class _ProfileState extends State<Profile> {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(30), topRight: Radius.circular(30)),
-              color: Colors.white),
+              color: Colors.blue[50]),
           child: Column(
             children: <Widget>[
               Padding(
@@ -111,8 +112,9 @@ class _ProfileState extends State<Profile> {
                     ),
                   ),
                   decoration: BoxDecoration(
+                      color: AppColors.colorPrimaryDark,
                       borderRadius: BorderRadius.all(Radius.circular(20)),
-                      border: Border.all(width: 1.0, color: Colors.black)),
+                      border: Border.all(width: 0.5, color: Colors.blueGrey)),
                 ),
               ),
               Padding(
@@ -141,8 +143,9 @@ class _ProfileState extends State<Profile> {
                     ),
                   ),
                   decoration: BoxDecoration(
+                      color: AppColors.colorPrimaryDark,
                       borderRadius: BorderRadius.all(Radius.circular(20)),
-                      border: Border.all(width: 1.0, color: Colors.black)),
+                      border: Border.all(width: 0.5, color: Colors.blueGrey)),
                 ),
               ),
               Padding(
@@ -171,8 +174,9 @@ class _ProfileState extends State<Profile> {
                     ),
                   ),
                   decoration: BoxDecoration(
+                      color: AppColors.colorPrimaryDark,
                       borderRadius: BorderRadius.all(Radius.circular(20)),
-                      border: Border.all(width: 1.0, color: Colors.black)),
+                      border: Border.all(width: 0.5, color: Colors.blueGrey)),
                 ),
               ),
               Padding(
@@ -201,8 +205,10 @@ class _ProfileState extends State<Profile> {
                     ),
                   ),
                   decoration: BoxDecoration(
+                      color: AppColors.colorPrimaryDark,
                       borderRadius: BorderRadius.all(Radius.circular(20)),
-                      border: Border.all(width: 1.0, color: Colors.black)),
+                      border: Border.all(width: 0.5, color: Colors.blueGrey)),
+                  // border: Border.all(width: 1.0, color: Colors.black)),
                 ),
               ),
             ],

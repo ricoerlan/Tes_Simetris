@@ -1,13 +1,12 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:tes_simetris/base/home.dart';
-import 'package:tes_simetris/database/db/pesan_api_provider.dart';
 import 'package:tes_simetris/services/firebase_notification.dart';
-import 'package:tes_simetris/ui/pesan_page.dart';
+import 'package:toast/toast.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
 
 void main() {
   runApp(MaterialApp(home: Login(), theme: ThemeData()));
@@ -72,6 +71,9 @@ class _LoginState extends State<Login> {
     if (form.validate()) {
       form.save();
       login();
+    } else {
+      Toast.show("Username/Password masih kosong", context,
+          duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
     }
   }
 
@@ -184,15 +186,19 @@ class _LoginState extends State<Login> {
         "http://jogjamotor24jam.com/login_simetris.php",
         body: {"MU_USERNAME": MU_USERNAME, "MU_PASSWORD": MU_PASSWORD});
     final data = jsonDecode(response.body);
-    STATUS = data['STATUS'];
-    String MESSAGE = data['MESSAGE'];
-    String ID_USER = data['ID_USER'];
-    String ID_SK = data['ID_SK'];
-    MP_UNIT = data['MP_UNIT'];
-    MP_NAMA = data['MP_NAMA'];
-    MU_NIP = data['MU_NIP'];
-    MPG_HP = data['MPG_HP'];
-    if (STATUS == 1) {
+
+    if (data['STATUS'] == 1) {
+      Toast.show("Login Berhasil", context,
+          duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+
+      STATUS = data['STATUS'];
+      String MESSAGE = data['MESSAGE'];
+      String ID_USER = data['ID_USER'];
+      String ID_SK = data['ID_SK'];
+      MP_UNIT = data['MP_UNIT'];
+      MP_NAMA = data['MP_NAMA'];
+      MU_NIP = data['MU_NIP'];
+      MPG_HP = data['MPG_HP'];
       setState(() {
         _loginStatus = LoginStatus.signIn;
         savePref(STATUS, ID_USER, ID_SK, MP_UNIT, MP_NAMA, MU_NIP, MPG_HP);
@@ -208,7 +214,8 @@ class _LoginState extends State<Login> {
       });
       print(MESSAGE);
     } else {
-      print(MESSAGE);
+      Toast.show("Login Gagal", context,
+          duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
     }
   }
 
@@ -382,7 +389,7 @@ class _LoginState extends State<Login> {
         );
         break;
       case LoginStatus.signIn:
-        return MainMenu(selectTab: 0);
+        return MainMenu(selectTab: 2);
         break;
     }
   }

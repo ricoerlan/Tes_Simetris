@@ -1,3 +1,4 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tes_simetris/custome/color.dart';
@@ -99,6 +100,19 @@ class _MainMenuState extends State<MainMenu> {
       ),
     ];
 
+    //Curved Navbar
+    // final _curvedNavBar = CurvedNavigationBar(
+    //     backgroundColor: Colors.white,
+    //     color: AppColors.colorPrimary,
+    //       items:
+    //       <Widget>[
+    //         Icon(Icons.home, size: 30),
+    //         Icon(Icons.message, size: 30),
+    //         Icon(Icons.person, size: 30),
+    //       ];
+    //     });
+
+    //Navbar Biasa
     final _bottomNavBar = BottomNavigationBar(
       backgroundColor: AppColors.lightBlue,
       items: _bottomNavBarItems,
@@ -154,7 +168,25 @@ class _MainMenuState extends State<MainMenu> {
         ],
       ),
       body: Center(child: _listPage[selectTab]),
-      bottomNavigationBar: _bottomNavBar,
+      bottomNavigationBar: CurvedNavigationBar(
+        // key: _bottomNavigationKey,
+        height: 66,
+        items: <Widget>[
+          Icon(Icons.home, size: 35),
+          Icon(Icons.message, size: 35),
+          Icon(Icons.person, size: 35),
+        ],
+        color: Colors.lightBlue,
+        // buttonBackgroundColor: Colors.white,
+        backgroundColor: Colors.blue[50],
+        animationCurve: Curves.fastOutSlowIn,
+        animationDuration: Duration(milliseconds: 600),
+        onTap: (index) {
+          setState(() {
+            selectTab = index;
+          });
+        },
+      ),
     );
   }
 }
